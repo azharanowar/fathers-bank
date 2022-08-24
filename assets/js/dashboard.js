@@ -4,10 +4,8 @@ let totalAvailableBalance = parseFloat( document.getElementById("totalAvailableB
 
 document.getElementById("depositBtn").addEventListener('click', function() {
     const newDepositAmount = parseFloat( document.getElementById("newDepositAmount").value );
-    if ( newDepositAmount === "" ) {
-        alert("Please enter your amount to deposit!!!");
-    } else if ( isNaN(newDepositAmount) ) {
-        alert("Deposit amount must be a number!!!");
+    if ( isNaN(newDepositAmount) ) {
+        alert("Deposit amount must be a number and can't be empty!!!");
     } else if ( newDepositAmount < 0 ) {
         alert("Deposit amount must be a postive number!!!");
     } else {
@@ -19,10 +17,8 @@ document.getElementById("depositBtn").addEventListener('click', function() {
 
 document.getElementById("withdrawBtn").addEventListener('click', function() {
     const newWithdrawAmount = parseFloat( document.getElementById("newWithdrawAmount").value );
-    if ( newWithdrawAmount === "" ) {
-        alert("Please enter your amount to withdraw!!!");
-    } else if ( isNaN(newWithdrawAmount) ) {
-        alert("Withdraw amount must be a number!!!");
+    if ( isNaN(newWithdrawAmount) ) {
+        alert("Withdraw amount must be a number and can't be empty!!!");
     } else if ( newWithdrawAmount < 0 ) {
         alert("Withdraw amount must be a postive number!!!");
     } else {
@@ -39,21 +35,22 @@ function depositAmount( newDepositAmount ) {
 }
 
 function withdrawAmount( newWithdrawAmount ) {
-    totalWithdrawnAmount += newWithdrawAmount;
-    balanceAmount( null, newWithdrawAmount);
+    if ( totalAvailableBalance < newWithdrawAmount ) {
+        alert("You can't withdraw more than the available balance!!!");
+    } else {
+        totalWithdrawnAmount += newWithdrawAmount;
+        balanceAmount( null, newWithdrawAmount);
+    }
 }
 
 function balanceAmount( deposit, withdraw ) {
     if ( deposit !== null ) {
         totalAvailableBalance += deposit;
         document.getElementById("totalDepositAmount").innerText = totalDepositAmount;
-    } else {
-        if ( totalAvailableBalance < withdraw ) {
-            alert("You can't withdraw more than the available balance!!!");
-        } else {
-            totalAvailableBalance -= withdraw;
-            document.getElementById("totalWithdrawnAmount").innerText = totalWithdrawnAmount;
-        }
+    } 
+    if ( withdraw !== null ) {
+        totalAvailableBalance -= withdraw;
+        document.getElementById("totalWithdrawnAmount").innerText = totalWithdrawnAmount;
     }
     document.getElementById("totalAvailableBalance").innerText = totalAvailableBalance;
 }
