@@ -1,9 +1,9 @@
-let totalDepositAmount = parseInt( document.getElementById("totalDepositAmount").innerText );
-let totalWithdrawnAmount = parseInt( document.getElementById("totalWithdrawnAmount").innerText );
-let totalAvailableBalance = parseInt( document.getElementById("totalAvailableBalance").innerText );
+let totalDepositAmount = parseFloat( document.getElementById("totalDepositAmount").innerText );
+let totalWithdrawnAmount = parseFloat( document.getElementById("totalWithdrawnAmount").innerText );
+let totalAvailableBalance = parseFloat( document.getElementById("totalAvailableBalance").innerText );
 
 document.getElementById("depositBtn").addEventListener('click', function() {
-    const newDepositAmount = parseInt( document.getElementById("newDepositAmount").value );
+    const newDepositAmount = parseFloat( document.getElementById("newDepositAmount").value );
     if ( newDepositAmount === "" ) {
         alert("Please enter your amount to deposit!!!");
     } else if ( isNaN(newDepositAmount) ) {
@@ -18,7 +18,7 @@ document.getElementById("depositBtn").addEventListener('click', function() {
 });
 
 document.getElementById("withdrawBtn").addEventListener('click', function() {
-    const newWithdrawAmount = parseInt( document.getElementById("newWithdrawAmount").value );
+    const newWithdrawAmount = parseFloat( document.getElementById("newWithdrawAmount").value );
     if ( newWithdrawAmount === "" ) {
         alert("Please enter your amount to withdraw!!!");
     } else if ( isNaN(newWithdrawAmount) ) {
